@@ -1,0 +1,779 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     31626,        771]
+NotebookOptionsPosition[     29165,        722]
+NotebookOutlinePosition[     29568,        738]
+CellTagsIndexPosition[     29525,        735]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Explore Color Dump / Data", "Subsection",ExpressionUUID->"3b877f17-db98-4bfb-ae4d-8556fb09eaf4"],
+
+Cell[BoxData[{
+ RowBox[{"names", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Last", "[", 
+     RowBox[{"ColorData", "[", "#", "]"}], "]"}], "&"}], "/@", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Gradients\>\"", ",", "\"\<Indexed\>\"", ",", "\"\<Named\>\"", ",", 
+     "\"\<Physical\>\"", ",", "\"\<ThemeGradients\>\"", ",", 
+     "\"\<Charting\>\"", ",", "\"\<Artistic\>\""}], 
+    "}"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"TabView", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"nam", "=", "#"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"nam", "->", 
+       RowBox[{"Grid", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"#", ",", 
+            RowBox[{"ColorData", "[", 
+             RowBox[{"nam", ",", "#"}], "]"}]}], "}"}], "&"}], "/@", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<StandardName\>\"", ",", "\"\<Name\>\"", ",", 
+           "\"\<AlternateNames\>\"", ",", "\"\<ColorFunction\>\"", ",", 
+           "\"\<ColorList\>\"", ",", "\"\<ColorRules\>\"", ",", 
+           "\"\<Range\>\"", ",", "\"\<ParameterCount\>\"", ",", 
+           "\"\<Image\>\"", ",", "\"\<Panel\>\""}], "}"}]}], "]"}]}]}], 
+     "\[IndentingNewLine]", ")"}], "&"}], "/@", "names"}], "]"}]}], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"3f871667-9d0f-4439-9fed-0d8c0d2997cf"],
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"DeleteCases", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"a", "=", "#"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"b", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"ToExpression", "[", "#", "]"}], "//.", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Hue", "[", "___", "]"}], "->", 
+                RowBox[{"RGBColor", "[", "]"}]}], ",", 
+               RowBox[{
+                RowBox[{"GrayLevel", "[", "___", "]"}], "->", 
+                RowBox[{"RGBColor", "[", "]"}]}], ",", 
+               RowBox[{
+                RowBox[{"LABColor", "[", "___", "]"}], "->", 
+                RowBox[{"RGBColor", "[", "]"}]}]}], "}"}]}], ")"}], "//.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"List", "[", 
+               RowBox[{
+                RowBox[{"RGBColor", "[", "___", "]"}], ".."}], "]"}], "->", 
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<ColorList\>\"", ",", "Bold", ",", "Red"}], 
+               "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"List", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"_", ",", 
+                  RowBox[{"RGBColor", "[", "___", "]"}]}], "}"}], ".."}], 
+               "]"}], "->", 
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<ColorList\>\"", ",", "Bold", ",", "Red"}], 
+               "]"}]}]}], "}"}]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"a", "=!=", 
+            RowBox[{"ToString", "[", "b", "]"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"a", ",", "b"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+        ")"}], "&"}], "/@", 
+      RowBox[{
+       RowBox[{"Names", "[", "\"\<DataPaclets`ColorDataDump`*\>\"", "]"}], 
+       "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ";;", "50"}], "]"}], "]"}]}], ",", "Null"}], "]"}], ",", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Input",
+ CellLabel->"In[9]:=",ExpressionUUID->"492b422f-807e-4b53-9165-3b3e58334d37"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Reduce folder to txt files only", "Subsection",ExpressionUUID->"e3229fe8-dd0f-453f-839e-56dde24326e3"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"allFiles", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"FileNames", "[", 
+      RowBox[{"\"\<*\>\"", ",", "\"\<SCMv8txt\>\"", ",", "Infinity"}], "]"}], 
+     ",", 
+     RowBox[{
+      RowBox[{"!", 
+       RowBox[{"DirectoryQ", "[", "#", "]"}]}], "&"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"txtFiles", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{"allFiles", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"FileExtension", "[", "#", "]"}], "===", "\"\<txt\>\""}], "&&", 
+       RowBox[{"!", 
+        RowBox[{"StringContainsQ", "[", 
+         RowBox[{"#", ",", "\"\<_HEX.txt\>\""}], "]"}]}]}], "&"}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"delFiles", "=", 
+   RowBox[{"Complement", "[", 
+    RowBox[{"allFiles", ",", "txtFiles"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"DeleteFile", "/@", "delFiles"}], ";"}]}], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"39d21fe4-0dfc-4224-8523-3a4f095b6918"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"allFols", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"FileNames", "[", 
+      RowBox[{"\"\<*\>\"", ",", "\"\<SCMv8txt\>\"", ",", "Infinity"}], "]"}], 
+     ",", 
+     RowBox[{
+      RowBox[{"DirectoryQ", "[", "#", "]"}], "&"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"delFols", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{"allFols", ",", 
+     RowBox[{
+      RowBox[{"StringContainsQ", "[", 
+       RowBox[{"#", ",", "\"\<+\>\""}], "]"}], "&"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DeleteDirectory", "/@", "delFols"}], ";"}]}], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"db71aa70-e0be-45e3-bf1c-07c022ae82b8"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Define color functions", "Subsection",ExpressionUUID->"475a6ba3-02a9-47d2-90f8-236f17d2e0b3"],
+
+Cell[CellGroupData[{
+
+Cell["The Function", "Subsubsection",ExpressionUUID->"428dce2c-e62c-4dfc-84be-fa76c383b37b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"AddScientificColours", "[", "dir_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "\n", "\t\t", 
+     RowBox[{
+     "grads", ",", "gradDiv", ",", "gradMulti", ",", "cyclic", ",", "all", 
+      ",", "swatches", ",", "colName", ",", "groupName", ",", "getCol", ",", 
+      "colRange", ",", "allDef", ",", "\[IndentingNewLine]", "\t\t", 
+      "nameDef", ",", "groupDef", ",", "newGroupsPattern", ",", 
+      "newShemeNames", ",", "newShemes", ",", "scientificColorMapsGroups", 
+      ",", "gr"}], "\n", "\t", "}"}], ",", "\[IndentingNewLine]", "\t", 
+    "\[IndentingNewLine]", "\t", 
+    RowBox[{"(*", 
+     RowBox[{"activated", " ", "ColorDataDump"}], "*)"}], 
+    "\[IndentingNewLine]", "\t", 
+    RowBox[{
+     RowBox[{"ColorData", "[", "]"}], ";", "\n", "\t", "\n", "\t", 
+     RowBox[{"(*", 
+      RowBox[{
+      "sklip", " ", "if", " ", "either", " ", "the", " ", "files", " ", "are",
+        " ", "not", " ", "there", " ", "or", " ", "the", " ", "colors", " ", 
+       "have", " ", "been", " ", "difined", " ", "already"}], "*)"}], 
+     "\[IndentingNewLine]", "\t", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Quiet", "[", 
+         RowBox[{
+          RowBox[{"Head", "[", 
+           RowBox[{
+           "ColorData", "[", "\"\<ScientificColorMapsGroups\>\"", "]"}], 
+           "]"}], "===", "ColorData"}], "]"}], "&&", 
+        RowBox[{"DirectoryQ", "[", "dir", "]"}]}], ",", "\[IndentingNewLine]",
+        "\t\t", "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"(*", 
+        RowBox[{
+        "color", " ", "functions", " ", "defined", " ", "in", " ", 
+         "scientific", " ", "colour", " ", "maps", " ", "v8"}], "*)"}], 
+       "\[IndentingNewLine]", "\t\t", 
+       RowBox[{
+        RowBox[{"grads", "=", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<acton\>\"", ",", "\"\<bamako\>\"", ",", "\"\<batlow\>\"", ",", 
+           "\"\<batlowK\>\"", ",", "\"\<batlowW\>\"", ",", "\"\<bilbao\>\"", 
+           ",", "\"\<buda\>\"", ",", "\"\<davos\>\"", ",", "\"\<devon\>\"", 
+           ",", "\"\<glasgow\>\"", ",", "\"\<grayC\>\"", ",", 
+           "\"\<hawaii\>\"", ",", "\"\<imola\>\"", ",", "\"\<lajolla\>\"", 
+           ",", "\"\<lapaz\>\"", ",", "\"\<lipari\>\"", ",", "\"\<navia\>\"", 
+           ",", "\"\<nuuk\>\"", ",", "\"\<oslo\>\"", ",", "\"\<tokyo\>\"", 
+           ",", "\"\<turku\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+        "\t\t", 
+        RowBox[{"gradDiv", "=", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<bam\>\"", ",", "\"\<berlin\>\"", ",", "\"\<broc\>\"", ",", 
+           "\"\<cork\>\"", ",", "\"\<lisbon\>\"", ",", "\"\<managua\>\"", 
+           ",", "\"\<roma\>\"", ",", "\"\<tofino\>\"", ",", "\"\<vanimo\>\"", 
+           ",", "\"\<vik\>\""}], "}"}]}], ";", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"gradMulti", "=", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<fes\>\"", ",", "\"\<bukavu\>\"", ",", "\"\<oleron\>\""}], 
+          "}"}]}], ";", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"cyclic", "=", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<bamO\>\"", ",", "\"\<brocO\>\"", ",", "\"\<corkO\>\"", ",", 
+           "\"\<romaO\>\"", ",", "\"\<vikO\>\""}], "}"}]}], ";", 
+        "\[IndentingNewLine]", "\t\t", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"all", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"grads", ",", "gradDiv", ",", "gradMulti", ",", "cyclic"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", "\t\t", "\[IndentingNewLine]", 
+        "\t\t", 
+        RowBox[{"(*", 
+         RowBox[{
+         "number", " ", "of", " ", "swatches", " ", "for", " ", "each"}], 
+         "*)"}], "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"swatches", "=", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<10\>\"", ",", "\"\<25\>\"", ",", "\"\<50\>\"", ",", 
+           "\"\<100\>\""}], "}"}]}], ";", "\[IndentingNewLine]", "\t\t", 
+        "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"(*", 
+         RowBox[{
+         "functions", " ", "that", " ", "generate", " ", "the", " ", 
+          "information", " ", "needed", " ", "for", " ", "the", " ", "named", 
+          " ", "colorfunctions"}], "*)"}], "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"colName", "=", 
+         RowBox[{
+          RowBox[{"Switch", "[", 
+           RowBox[{"#2", ",", "\[IndentingNewLine]", "\t\t\t", "1", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Capitalize", "[", "#1", "]"}], ",", "#1", ",", 
+              RowBox[{"{", "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+            "\t\t\t", "2", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Capitalize", "[", "#1", "]"}], "<>", 
+               "\"\<Discrete\>\"", "<>", "#3"}], ",", 
+              RowBox[{"#1", "<>", "\"\< discrete \>\"", "<>", "#3"}], ",", 
+              RowBox[{"{", "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+            "\t\t\t", "3", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Capitalize", "[", "#1", "]"}], "<>", 
+               "\"\<Categorical\>\""}], ",", 
+              RowBox[{"#1", "<>", "\"\< categorical\>\""}], ",", 
+              RowBox[{"{", "}"}]}], "}"}]}], "\[IndentingNewLine]", "\t\t", 
+           "]"}], "&"}]}], ";", "\[IndentingNewLine]", "\t\t", "\n", "\t\t", 
+        RowBox[{"groupName", "=", 
+         RowBox[{
+          RowBox[{"{", "\n", "\t\t\t", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"#2", "===", "1"}], ",", "\"\<Gradients\>\"", ",", 
+              "\"\<Indexed\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+            "\t\t\t", "\"\<ScientificColorMaps\>\"", ",", 
+            "\[IndentingNewLine]", "\t\t\t", 
+            RowBox[{
+             RowBox[{"Which", "[", "\[IndentingNewLine]", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"grads", ",", "#1"}], "]"}], ",", 
+               "\"\<Sequential\>\"", ",", "\[IndentingNewLine]", "\t\t\t\t", 
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"gradDiv", ",", "#1"}], "]"}], ",", 
+               "\"\<Diverging\>\"", ",", "\[IndentingNewLine]", "\t\t\t\t", 
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"gradMulti", ",", "#1"}], "]"}], ",", 
+               "\"\<MultiSequential\>\"", ",", "\[IndentingNewLine]", 
+               "\t\t\t\t", 
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"cyclic", ",", "#1"}], "]"}], ",", "\"\<Cyclic\>\""}],
+               "\[IndentingNewLine]", "\t\t\t", "]"}], "<>", 
+             "\"\<Gradients\>\"", "<>", 
+             RowBox[{"Switch", "[", 
+              RowBox[{
+              "#2", ",", "1", ",", "\"\<\>\"", ",", "2", ",", 
+               "\"\<Discrete\>\"", ",", "3", ",", "\"\<Categorical\>\""}], 
+              "]"}]}]}], "\[IndentingNewLine]", "\t\t", "}"}], "&"}]}], ";", 
+        "\[IndentingNewLine]", "\t\t", "\n", "\t\t", 
+        RowBox[{"getCol", "=", 
+         RowBox[{
+          RowBox[{"Switch", "[", 
+           RowBox[{"#2", ",", "\[IndentingNewLine]", "\t\t\t", "1", ",", " ", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"!", 
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"gradMulti", ",", "#1"}], "]"}]}], ",", 
+              "\[IndentingNewLine]", "\t\t\t\t", 
+              RowBox[{"RGBColor", "/@", 
+               RowBox[{"Import", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"FileNameJoin", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"dir", ",", "#1", ",", "#1"}], "}"}], "]"}], 
+                  "<>", "\"\<.txt\>\""}], ",", "\"\<Data\>\""}], "]"}]}], ",",
+               "\[IndentingNewLine]", "\t\t\t\t", 
+              RowBox[{"Transpose", "@", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Join", "[", 
+                  RowBox[{
+                   RowBox[{"Subdivide", "[", 
+                    RowBox[{"0.", ",", "0.5", ",", "127"}], "]"}], ",", 
+                   RowBox[{"Subdivide", "[", 
+                    RowBox[{"0.5", ",", "1.", ",", "127"}], "]"}]}], "]"}], 
+                 ",", " ", 
+                 RowBox[{"RGBColor", "/@", 
+                  RowBox[{"Import", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"FileNameJoin", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"dir", ",", "#1", ",", "#1"}], "}"}], "]"}], 
+                    "<>", "\"\<.txt\>\""}], ",", "\"\<Data\>\""}], "]"}]}]}], 
+                "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", "\t\t\t", "2", 
+            ",", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"RGBColor", "[", 
+               RowBox[{
+                RowBox[{"ToExpression", "@", 
+                 RowBox[{
+                  RowBox[{"StringSplit", "[", "#", "]"}], "[", 
+                  RowBox[{"[", 
+                   RowBox[{"1", ";;", "3"}], "]"}], "]"}]}], "/", "255"}], 
+               "]"}], "&"}], "/@", 
+             RowBox[{
+              RowBox[{"Import", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"FileNameJoin", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                   "dir", ",", "#1", ",", "\"\<DiscretePalettes\>\"", ",", 
+                    "#1"}], "}"}], "]"}], "<>", "#3", "<>", "\"\<.txt\>\""}], 
+                ",", "\"\<Lines\>\""}], "]"}], "[", 
+              RowBox[{"[", 
+               RowBox[{"3", ";;"}], "]"}], "]"}]}], ",", 
+            "\[IndentingNewLine]", "\t\t\t", "3", ",", " ", 
+            RowBox[{"RGBColor", "/@", 
+             RowBox[{"Import", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"FileNameJoin", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                  "dir", ",", "#1", ",", "\"\<CategoricalPalettes\>\"", ",", 
+                   "#1"}], "}"}], "]"}], "<>", "\"\<S.txt\>\""}], ",", 
+               "\"\<Data\>\""}], "]"}]}]}], "\[IndentingNewLine]", "\t\t", 
+           "]"}], "&"}]}], ";", "\n", "\t\t", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"colRange", "=", 
+         RowBox[{
+          RowBox[{"Switch", "[", 
+           RowBox[{"#1", ",", "\[IndentingNewLine]", "\t\t\t", "1", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", " ", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+            "\t\t\t", "2", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", " ", 
+              RowBox[{"ToExpression", "[", "#2", "]"}], ",", " ", "1"}], 
+             "}"}], ",", "\n", "\t\t\t", "3", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", " ", "100", ",", " ", "1"}], "}"}]}], " ", 
+           "\n", "\t\t", "]"}], "&"}]}], ";", "\[IndentingNewLine]", "\t\t", 
+        "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"(*", 
+         RowBox[{"generate", " ", "all", " ", "color", " ", "functions"}], 
+         "*)"}], "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"allDef", "=", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", "\[IndentingNewLine]", "\t\t\t", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"colName", "[", 
+                RowBox[{"name", ",", "i", ",", "j"}], "]"}], ",", " ", 
+               RowBox[{"groupName", "[", 
+                RowBox[{"name", ",", "i", ",", "j"}], "]"}], ",", " ", "1", 
+               ",", " ", 
+               RowBox[{"colRange", "[", 
+                RowBox[{"i", ",", "j"}], "]"}], ",", " ", 
+               RowBox[{"getCol", "[", 
+                RowBox[{"name", ",", "i", ",", "j"}], "]"}], ",", " ", 
+               "\"\<\>\""}], "}"}], "\[IndentingNewLine]", "\t\t", ",", 
+             RowBox[{"{", 
+              RowBox[{"name", ",", "all"}], "}"}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", " ", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"MemberQ", "[", 
+                  RowBox[{"grads", ",", "name"}], "]"}], ",", " ", 
+                 RowBox[{"{", 
+                  RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", " ", 
+                 RowBox[{"{", 
+                  RowBox[{"1", ",", "2"}], "}"}]}], "]"}]}], "}"}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"j", ",", " ", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"i", "==", "2"}], ",", " ", "swatches", ",", " ", 
+                 RowBox[{"{", "\"\<\>\"", "}"}]}], "]"}]}], "}"}]}], "]"}], 
+           ",", " ", "2"}], "]"}]}], ";", "\[IndentingNewLine]", "\t\t", 
+        "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"(*", 
+         RowBox[{"modify", " ", "ColorDataDump"}], "*)"}], 
+        "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"nameDef", "=", 
+         RowBox[{"allDef", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"groupDef", "=", 
+         RowBox[{"DeleteCases", "[", 
+          RowBox[{
+           RowBox[{"DeleteCases", "[", 
+            RowBox[{
+             RowBox[{"DeleteDuplicates", "[", 
+              RowBox[{"Flatten", "[", 
+               RowBox[{"allDef", "[", 
+                RowBox[{"[", 
+                 RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], "]"}], ",", 
+             "\"\<Gradients\>\""}], "]"}], ",", "\"\<Indexed\>\""}], "]"}]}], 
+        ";", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"newGroupsPattern", "=", 
+         RowBox[{"Alternatives", "@@", 
+          RowBox[{"Join", "[", 
+           RowBox[{
+            RowBox[{"DataPaclets`ColorDataDump`colorSchemeGroupsPattern", "/.", 
+             RowBox[{"Alternatives", "->", "List"}]}], ",", "groupDef"}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"newShemeNames", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{
+          "DataPaclets`ColorDataDump`colorSchemeNames", ",", "nameDef"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"newShemes", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"DataPaclets`ColorDataDump`colorSchemes", ",", "allDef"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", "\t\t", "\[IndentingNewLine]", 
+        "\t\t", 
+        RowBox[{
+        "DataPaclets`ColorDataDump`colorSchemeGroupsPattern", "=", 
+         "newGroupsPattern"}], ";", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{
+        "DataPaclets`ColorDataDump`colorSchemeNames", "=", "newShemeNames"}], 
+        ";", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"DataPaclets`ColorDataDump`colorSchemes", "=", "newShemes"}], 
+        ";", "\[IndentingNewLine]", "\t\t", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"(*", 
+         RowBox[{
+         "Modify", " ", "ColorData", " ", "such", " ", "it", " ", "can", " ", 
+          "display", " ", "the", " ", "Scientific", " ", "color", " ", "map", 
+          " ", "groups"}], "*)"}], "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"scientificColorMapsGroups", "=", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<SequentialGradients\>\"", ",", 
+           "\"\<SequentialGradientsDiscrete\>\"", ",", 
+           "\"\<SequentialGradientsCategorical\>\"", ",", 
+           "\"\<DivergingGradients\>\"", ",", "\n", "\t\t\t", 
+           "\"\<DivergingGradientsDiscrete\>\"", ",", 
+           "\"\<MultiSequentialGradients\>\"", ",", 
+           "\"\<MultiSequentialGradientsDiscrete\>\"", ",", "\n", "\t\t\t", 
+           "\"\<CyclicGradients\>\"", ",", 
+           "\"\<CyclicGradientsDiscrete\>\""}], "}"}]}], ";", "\n", "\t\t\t", 
+        "\n", "\t\t", 
+        RowBox[{"Unprotect", "[", "ColorData", "]"}], ";", "\n", "\t\t", 
+        RowBox[{
+         RowBox[{"ColorData", "[", "\"\<ScientificColorMapsGroups\>\"", "]"}],
+          "=", "scientificColorMapsGroups"}], ";", "\[IndentingNewLine]", 
+        "\t\t", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"gr", "=", "#"}], ";", 
+            RowBox[{
+             RowBox[{"ColorData", "[", "gr", "]"}], "=", 
+             RowBox[{"Sort", "[", 
+              RowBox[{"Pick", "[", 
+               RowBox[{"DataPaclets`ColorDataDump`colorSchemeNames", ",", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"MemberQ", "[", 
+                   RowBox[{"#", ",", "gr"}], "]"}], "&"}], "/@", 
+                 RowBox[{"DataPaclets`ColorDataDump`colorSchemes", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"All", ",", "2"}], "]"}], "]"}]}], ",", "True"}], 
+               "]"}], "]"}]}]}], ")"}], "&"}], "/@", 
+         RowBox[{"Prepend", "[", 
+          RowBox[{
+          "scientificColorMapsGroups", ",", "\"\<ScientificColorMaps\>\""}], 
+          "]"}]}], ";", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"Protect", "[", "ColorData", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "\t", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Code",
+ CellLabel->"In[1]:=",ExpressionUUID->"6ca0795e-e818-42dd-b022-d8853dc28787"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Run the code", "Subsubsection",ExpressionUUID->"bd998ec5-96c4-44b2-bf5f-69283beee292"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"dir", "=", "\"\<SCMv8txt\>\""}], ";"}], "\n", 
+ RowBox[{"AddScientificColours", "[", "dir", "]"}]}], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"7e528e14-3f1e-43a9-aeac-812d08aa0514"],
+
+Cell[BoxData[
+ RowBox[{"Column", "[", 
+  RowBox[{"ColorData", "[", "\"\<ScientificColorMapsGroups\>\"", "]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[26]:=",ExpressionUUID->"593b3bd5-9eb4-4708-902f-b1e17429ed97"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Testing", "Subsubsection",ExpressionUUID->"75763b1e-f604-43a4-bbd5-39e80d416b15"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Plot3D", "[", 
+    RowBox[{
+     RowBox[{"Exp", "[", 
+      RowBox[{
+       RowBox[{"-", 
+        RowBox[{"x", "^", "2"}]}], "-", 
+       RowBox[{"y", "^", "2"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", 
+       RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+     RowBox[{"ColorFunction", "\[Rule]", "#"}], ",", 
+     RowBox[{"ImageSize", "->", "200"}], ",", 
+     RowBox[{"PlotLabel", "->", "#"}]}], "]"}], "&"}], "/@", 
+  RowBox[{"ColorData", "[", "\"\<SequentialGradients\>\"", "]"}]}]], "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"e95e717b-5d73-4faa-86b1-bcaa2f3a4260"],
+
+Cell[BoxData[{
+ RowBox[{"ColorData", "[", 
+  RowBox[{"{", 
+   RowBox[{"\"\<Acton\>\"", ",", "\"\<Reverse\>\""}], "}"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ColorData", "[", 
+  RowBox[{"{", 
+   RowBox[{"\"\<Acton\>\"", ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "10"}], "}"}]}], "}"}], "]"}]}], "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"8b37c56b-0334-45f3-9ac4-304ec6106af8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Visualize all colour maps", "Subsubsection",ExpressionUUID->"6e514e7c-84d8-416d-9525-5c23fa6e7534"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"allGroups", "=", 
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"ColorData", "[", "\"\<ScientificColorMapsGroups\>\"", "]"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<ScientificColorMaps\>\"", ",", "\"\<Gradients\>\"", ",", 
+       "\"\<Indexed\>\"", ",", "\"\<ThemeGradients\>\"", ",", 
+       "\"\<Charting\>\"", ",", "\"\<Artistic\>\""}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"nc", "=", "4"}], ";", 
+   RowBox[{"sz", "=", "250"}], ";", 
+   RowBox[{"sp", "=", "1"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ims", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Column", "[", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"#", ",", "Bold", ",", "Black", ",", "Large"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Grid", "[", 
+          RowBox[{
+           RowBox[{"Partition", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Column", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Style", "[", 
+                    RowBox[{"#", ",", "Bold"}], "]"}], ",", 
+                   RowBox[{"Show", "[", 
+                    RowBox[{
+                    RowBox[{"ColorData", "[", 
+                    RowBox[{"#", ",", "\"\<Image\>\""}], "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "sz"}]}], "]"}]}], "}"}], 
+                 ",", 
+                 RowBox[{"Alignment", "->", "Center"}]}], "]"}], "&"}], "/@", 
+              RowBox[{"ColorData", "[", "#", "]"}]}], ",", "nc", ",", "nc", 
+             ",", "1", ",", 
+             RowBox[{"{", "}"}]}], "]"}], ",", 
+           RowBox[{"Spacings", "\[Rule]", "sp"}], ",", 
+           RowBox[{"Frame", "->", "All"}]}], "]"}]}], "\[IndentingNewLine]", 
+        "}"}], ",", 
+       RowBox[{"Alignment", "->", "Center"}]}], "]"}], "&"}], "/@", 
+    "allGroups"}]}], ";"}]}], "Input",
+ CellLabel->"In[38]:=",ExpressionUUID->"f6ab2f48-ec7c-4ea2-8a1a-e2cc5f61ceb3"],
+
+Cell[BoxData[
+ RowBox[{"TabView", "[", 
+  RowBox[{
+   RowBox[{"Thread", "[", 
+    RowBox[{"allGroups", "->", "ims"}], "]"}], ",", 
+   RowBox[{"ControlPlacement", "->", "Left"}]}], "]"}]], "Input",
+ CellLabel->"In[41]:=",ExpressionUUID->"8c2f8bc4-49ad-466b-acad-dcbb12bd6b4b"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Export", "Subsubsection",ExpressionUUID->"167ff30c-302a-421a-a7ab-fb2e5b6337c1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Quiet", "@", 
+   RowBox[{"CreateDirectory", "[", "\"\<images\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<images\>\"", ",", 
+         RowBox[{
+          RowBox[{"allGroups", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "<>", "\"\<.jpg\>\""}]}], "}"}], 
+       "]"}], ",", 
+      RowBox[{"ims", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "allGroups", "]"}]}], "}"}]}], "]"}], 
+  ";"}]}], "Input",ExpressionUUID->"7312bd78-3c2a-442c-a2fa-27ab8de44ba0"]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{1920, 1117},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (January 30, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"c9b712d7-94f6-4686-866a-caa0265be8e9"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 102, 0, 54, "Subsection",ExpressionUUID->"3b877f17-db98-4bfb-ae4d-8556fb09eaf4"],
+Cell[685, 24, 1367, 34, 110, "Input",ExpressionUUID->"3f871667-9d0f-4439-9fed-0d8c0d2997cf"],
+Cell[2055, 60, 2274, 58, 110, "Input",ExpressionUUID->"492b422f-807e-4b53-9165-3b3e58334d37"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4366, 123, 108, 0, 54, "Subsection",ExpressionUUID->"e3229fe8-dd0f-453f-839e-56dde24326e3"],
+Cell[4477, 125, 991, 29, 90, "Input",ExpressionUUID->"39d21fe4-0dfc-4224-8523-3a4f095b6918"],
+Cell[5471, 156, 703, 20, 70, "Input",ExpressionUUID->"db71aa70-e0be-45e3-bf1c-07c022ae82b8"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[6211, 181, 99, 0, 38, "Subsection",ExpressionUUID->"475a6ba3-02a9-47d2-90f8-236f17d2e0b3"],
+Cell[CellGroupData[{
+Cell[6335, 185, 92, 0, 45, "Subsubsection",ExpressionUUID->"428dce2c-e62c-4dfc-84be-fa76c383b37b"],
+Cell[6430, 187, 17285, 371, 1492, "Code",ExpressionUUID->"6ca0795e-e818-42dd-b022-d8853dc28787"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[23752, 563, 92, 0, 37, "Subsubsection",ExpressionUUID->"bd998ec5-96c4-44b2-bf5f-69283beee292"],
+Cell[23847, 565, 330, 7, 70, "Input",ExpressionUUID->"7e528e14-3f1e-43a9-aeac-812d08aa0514"],
+Cell[24180, 574, 209, 4, 29, "Input",ExpressionUUID->"593b3bd5-9eb4-4708-902f-b1e17429ed97"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24426, 583, 87, 0, 45, "Subsubsection",ExpressionUUID->"75763b1e-f604-43a4-bbd5-39e80d416b15"],
+Cell[24516, 585, 736, 20, 29, "Input",ExpressionUUID->"e95e717b-5d73-4faa-86b1-bcaa2f3a4260"],
+Cell[25255, 607, 393, 10, 50, "Input",ExpressionUUID->"8b37c56b-0334-45f3-9ac4-304ec6106af8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25685, 622, 105, 0, 45, "Subsubsection",ExpressionUUID->"6e514e7c-84d8-416d-9525-5c23fa6e7534"],
+Cell[25793, 624, 2181, 57, 150, "Input",ExpressionUUID->"f6ab2f48-ec7c-4ea2-8a1a-e2cc5f61ceb3"],
+Cell[27977, 683, 275, 6, 29, "Input",ExpressionUUID->"8c2f8bc4-49ad-466b-acad-dcbb12bd6b4b"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[28289, 694, 86, 0, 37, "Subsubsection",ExpressionUUID->"167ff30c-302a-421a-a7ab-fb2e5b6337c1"],
+Cell[28378, 696, 759, 22, 50, "Input",ExpressionUUID->"7312bd78-3c2a-442c-a2fa-27ab8de44ba0"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
