@@ -11,9 +11,9 @@ This is still work in progress. I would be grateful if any of the coders here ha
 
 Back in 2018 Fabio Crameri proposed some good color maps for scientific visualization and recently V8 was released.
 
-Crameri, F. (2018). Scientific colour maps. Zenodo. [doi](http://doi.org/10.5281/zenodo.1243862)
-Crameri, F. (2018), Geodynamic diagnostics, scientific visualisation and StagLab 3.0, Geosci. Model Dev., 11, 2541-2562, [doi](https://doi.org/10.5194/gmd-11-2541-2018)
-Crameri, F., G.E. Shephard, and P.J. Heron (2020), The misuse of colour in science communication, Nature Communications, 11, 5444. [doi](https://www.nature.com/articles/s41467-020-19160-7)
+- Crameri, F. (2018). Scientific colour maps. Zenodo. [doi](http://doi.org/10.5281/zenodo.1243862)
+- Crameri, F. (2018), Geodynamic diagnostics, scientific visualisation and StagLab 3.0, Geosci. Model Dev., 11, 2541-2562, [doi](https://doi.org/10.5194/gmd-11-2541-2018)
+- Crameri, F., G.E. Shephard, and P.J. Heron (2020), The misuse of colour in science communication, Nature Communications, 11, 5444. [doi](https://www.nature.com/articles/s41467-020-19160-7)
 
 In the Readme the Mathematica integration is given by this code which works but needs to run every time and only one color function at a time.
 
